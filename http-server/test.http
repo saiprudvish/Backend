@@ -1,0 +1,32 @@
+GET http://localhost:3000/users
+
+###
+
+GET http://localhost:3000/user/100
+
+###
+
+POST http://localhost:3000/createuser
+Content-Type: application/json
+
+{
+    "id":300,
+    "name":"Abhinav",
+    "city":"Mancherial"
+}
+
+###
+
+PUT http://localhost:3000/updateuser/300
+Content-Type: application/json
+
+
+{
+    "id":100,
+    "name":"prudvish",
+    "city":"karimnagar"
+}
+
+###
+
+DELETE http://localhost:3000/deleteuser/300
