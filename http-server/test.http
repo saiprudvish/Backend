@@ -1,32 +1,27 @@
-GET http://localhost:3000/users
+GET http://localhost:3000/user/getusers
 
 ###
-
-GET http://localhost:3000/user/100
+GET http://localhost:3000/user/getuser/prudvish
 
 ###
-
-POST http://localhost:3000/createuser
+POST http://localhost:3000/user/createuser
 Content-Type: application/json
 
 {
-    "id":300,
-    "name":"Abhinav",
-    "city":"Mancherial"
+    "username":"prudvish",
+    "email":"prudvish7@gmail.com",
+    "city":"karimnagar",
+    "age":20
 }
 
 ###
 
-PUT http://localhost:3000/updateuser/300
+PUT http://localhost:3000/user/updateuser/prudvish
 Content-Type: application/json
 
-
 {
-    "id":100,
-    "name":"prudvish",
-    "city":"karimnagar"
+      "username":"prudvish",
+    "email":"saiprudvish7@gmail.com",
+    "city":"karimnagar",
+    "age":19
 }
-
-###
-
-DELETE http://localhost:3000/deleteuser/300

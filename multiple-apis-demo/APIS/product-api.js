@@ -6,6 +6,8 @@ const productApi=exp.Router();
 
 
 
+
+
 //sampleroute
 productApi.get("/getproducts",(req,res)=>{
     res.send({message:"reply from productapi"})

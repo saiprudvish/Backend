@@ -1,11 +1,40 @@
 //import
+
+
+
 const exp= require("express")
 //create express object
  const app= exp();
 
-app.use(exp.json())
+const fs=require("fs")
+app.use(exp.json())//body passing middleware
 
 let users=[];
+
+
+
+
+//reading data from a file
+app.get("/read",(req,res,next)=>{
+    //read from file
+    fs.readFile('./data.txt', (err,data)=>{
+        if(err){
+            res.send({message:err})
+        }
+        else{
+            try{
+                let text=data.toString();
+                res.send({message:text})
+            }
+            catch(err){
+                //forward error obj to errorhandling middleware
+                next(err)
+
+            }
+        }
+    })
+    
+})
 
 //GET
 //http://localhost:3000/users
@@ -90,6 +119,22 @@ app.delete('/deleteuser/:id',(req,res)=>{
 
 
 })
+//do deal with invalid errors
+app.use((req,res,next)=>{
+    res.send({message:`invalid  ${req.url} path`})
+
+})
+
+
+
+//error handling middleware
+app.use((err ,req,  res, next)=>{
+
+    res.send({message:`${err.message}`})
+})
+
+
+
 
 
 
