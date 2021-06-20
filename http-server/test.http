@@ -8,7 +8,7 @@ POST http://localhost:3000/user/createuser
 Content-Type: application/json
 
 {
-    "username":"prudvish",
+    "username":"saiprudvish",
     "email":"prudvish7@gmail.com",
     "city":"karimnagar",
     "age":20
@@ -16,12 +16,15 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/user/updateuser/prudvish
+PUT http://localhost:3000/user/updateuser/saiprudvish
 Content-Type: application/json
 
 {
-      "username":"prudvish",
+      "username":"saiprudvish",
     "email":"saiprudvish7@gmail.com",
     "city":"karimnagar",
     "age":19
 }
+###
+
+DELETE  http://localhost:3000/user/deleteuser/saiprudvish
