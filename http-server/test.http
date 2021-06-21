@@ -1,7 +1,7 @@
 GET http://localhost:3000/user/getusers
 
 ###
-GET http://localhost:3000/user/getuser/prudvish
+GET http://localhost:3000/user/getuser/saiprudvish
 
 ###
 POST http://localhost:3000/user/createuser
@@ -9,6 +9,7 @@ Content-Type: application/json
 
 {
     "username":"saiprudvish",
+    "password":"sai_7",
     "email":"prudvish7@gmail.com",
     "city":"karimnagar",
     "age":20
@@ -28,3 +29,12 @@ Content-Type: application/json
 ###
 
 DELETE  http://localhost:3000/user/deleteuser/saiprudvish
+
+###
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "username":"saiprudvish",
+    "password":"sai_7"
+}

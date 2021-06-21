@@ -1,8 +1,10 @@
 //create mini express app
 const exp = require('express')
 const userApi = exp.Router();
+const jwt=require("jsonwebtoken")
 
 const expressErrorHandler = require("express-async-handler")
+const bcryptjs=require("bcryptjs")
 //body parsing middlleware
 userApi.use(exp.json())
 
@@ -73,11 +75,11 @@ userApi.post("/createuser", expressErrorHandler(async (req, res, next) => {
         res.send({ message: "User already existed" })
     }
     else {
-        // //hash password
-        // let hashedPassword = await bcryptjs.hash(newUser.password, 7)
-        // //replace password
-        // newUser.password = hashedPassword;
-        // //insert
+         //hash password
+        let hashedPassword = await bcryptjs.hash(newUser.password, 7)
+        //replace password
+         newUser.password = hashedPassword;
+        //insert
         await userCollectionObj.insertOne(newUser)
         res.send({ message: "User created" })
     }
@@ -114,6 +116,34 @@ userApi.delete("/deleteuser/:username", expressErrorHandler(async (req, res) => 
     }
 }))
 
+//user login
+userApi.post('/login', expressErrorHandler(async (req, res) => {
+
+    //get user credetials
+    let credentials = req.body;
+    //search user by username
+    let user = await userCollectionObj.findOne({ username: credentials.username })
+    //if user not found
+    if (user === null) {
+        res.send({ message: "invalid username" })
+    }
+    else {
+        //compare the password
+        let result = await bcryptjs.compare(credentials.password, user.password)
+        //if not matched
+        if (result === false) {
+            res.send({ message: "Invalid password" })
+        }
+        else {
+            //create a token
+            let signedToken =  jwt.sign({ username: credentials.username }, 'abcdef', { expiresIn: 120 })
+            //send token to client
+            res.send({ message: "login success", token: signedToken,username: credentials.username })
+        }
+
+    }
+
+}))
 
 
 
